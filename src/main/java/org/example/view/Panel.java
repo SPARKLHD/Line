@@ -1,5 +1,7 @@
 package org.example.view;
 
+import org.example.controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,11 +12,27 @@ import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
 public class Panel extends JPanel {
-    Point2D[] points;
-    RectangularShape shape;
-    public Panel() {
-        points = new Point2D[2];
-        shape = new Ellipse2D.Double();
+
+    private Controller controller;
+
+    public Panel(Controller controller) {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
