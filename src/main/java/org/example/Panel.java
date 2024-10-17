@@ -17,6 +17,7 @@ public class Panel extends JPanel {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 points[0] = e.getPoint();
+                //
             }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
