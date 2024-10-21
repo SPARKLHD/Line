@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Frame extends JFrame {
-    Panel panel;
+    Panel panel; //для доступа к панели
 
     public Frame(Panel panel) throws HeadlessException {
-        setVisible(true);
-        setResizable(false);
-        setSize(1000,1000);
-        add(panel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true); //видимость
+        setResizable(false); //запрет изменения размера окна
+        setSize(1000,1000); //размер окна
+        add(panel); //добавление панели
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //кнопка закрытия
     }
 }

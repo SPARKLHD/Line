@@ -11,32 +11,36 @@ import java.util.Collection;
 
 public class Panel extends JPanel {
 
-    private Controller controller;
+    private final Controller controller; //для доступа к контроллеру
 
-    // Правильно передаем контроллер в конструктор
+    //передаем контроллер в конструктор
     public Panel(Controller controller) {
-        this.controller = controller;  // Сохраняем ссылку на контроллер
+        this.controller = controller;  //ссылка на контроллер
 
+        //слушатели мыши
         addMouseListener(new MouseAdapter() {
             @Override
+            //на нажатие
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                controller.mousePressed(e.getPoint());
+                controller.mousePressed(e.getPoint()); //управление через контроллер
             }
 
+            //на отпускание кнопки
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                controller.mouseReleased(e.getPoint());
+                controller.mouseReleased(e.getPoint()); //управление через контроллер
             }
         });
 
+        //слушатель движения мыши
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
-                controller.mouseDragged(e.getPoint());
-                repaint(); // Обновляем панель при каждом перемещении мыши
+                controller.mouseDragged(e.getPoint()); //управление через контроллер
+                repaint(); // обновлние панели при каждом перемещении мыши
             }
         });
     }
