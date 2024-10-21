@@ -1,53 +1,42 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.model.Shape;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.RectangularShape;
+import java.util.Collection;
 
 public class Panel extends JPanel {
 
     private Controller controller;
 
+    // Правильно передаем контроллер в конструктор
     public Panel(Controller controller) {
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                super.mouseDragged(e);
-            }
-        });
-
-
-
-
-
-
-
-
-
-
+        this.controller = controller;  // Сохраняем ссылку на контроллер
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                points[0] = e.getPoint();
+                controller.mousePressed(e.getPoint());
+            }
 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+                controller.mouseReleased(e.getPoint());
             }
         });
-        addMouseMotionListener(new MouseMotionAdapter() {
+
+        addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
-                points[1] = e.getPoint();
-                shape.setFrameFromDiagonal(points[0],points[1]);
-                repaint();
+                controller.mouseDragged(e.getPoint());
+                repaint(); // Обновляем панель при каждом перемещении мыши
             }
         });
     }
@@ -56,6 +45,17 @@ public class Panel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.draw(shape);
+
+        // Рисуем все фигуры из модели
+        Collection<Shape> shapes = controller.translate();
+        for (Shape shape : shapes) {
+            shape.draw(g2); // Отрисовка каждой фигуры
+        }
+
+        // Отрисовка текущей фигуры, если она есть
+        Shape currentShape = controller.model.getCurrentShape();
+        if (currentShape != null) {
+            currentShape.draw(g2);
+        }
     }
 }

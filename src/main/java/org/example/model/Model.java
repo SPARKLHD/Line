@@ -8,14 +8,27 @@ import java.util.Collection;
 
 public class Model {
     Shape currentShape;
-    Collection<Shape> list;
+    Collection<Shape> shapes; //сюда складываем все фигуры
 
 
     public Model(){
-        list = new ArrayList<>();
+        shapes = new ArrayList<>();
     }
 
-    public void setCurrentShape(Shape currentShape){
+    public void setCurrentShape(Shape currentShape) {
         this.currentShape = currentShape;
     }
+
+    public Shape getCurrentShape() {
+        return currentShape;
+    }
+
+    public Collection<Shape> getList() {
+        return shapes;
+    }
+
+    public void add(Shape currentShape){
+        shapes.add(currentShape);
+    }
+
 }
