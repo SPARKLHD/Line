@@ -38,13 +38,15 @@ public class Controller {
     //обработка действий мыши: отпускание кнопки
     public void mouseReleased(Point point){
         Shape current = model.getCurrentShape(); //получаем текущую фигуру
-        current.finishShape(point); //устанавливаем последнюю точку
+        //TODO нужно ли заключительное обновление????
+        // current.finishShape(point); //устанавливаем последнюю точку
         model.add(current); // добавляем фигуру в коллекцию модели
         panel.repaint(); //перерисовываем снова
         model.setCurrentShape(null); // фигура закончена, больше изменять её нельзя, ставим нулевой указатель
     }
 
 
+    //достаем коллекцию фигур из модели
     public Collection<Shape> translate(){
         return model.getList();
     }
