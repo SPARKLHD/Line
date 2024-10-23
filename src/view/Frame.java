@@ -17,7 +17,7 @@ public class Frame extends JFrame
         JButton colorButton = new JButton("Сменить цвет");
         colorButton.addActionListener(_ ->
         {
-            Color newColor = JColorChooser.showDialog(null, "Выберите цвет", Color.BLUE);
+            Color newColor = JColorChooser.showDialog(null, "Выберите цвет", Color.RED);
 
             if (newColor != null)
             {

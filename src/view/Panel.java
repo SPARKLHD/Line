@@ -15,6 +15,7 @@ public class Panel extends JPanel
     private final Controller controller;
     private Color currentColor = Color.RED;
     private int strokeWidth = 3;
+    private boolean isFilled = false;
 
     public Panel(Controller controller)
     {
@@ -26,7 +27,7 @@ public class Panel extends JPanel
             public void mousePressed(MouseEvent event)
             {
                 Point one = controller.createPoint(event.getPoint());
-                controller.createShape(one, currentColor, controller.getCurrentShape().isFilled());
+                controller.createShape(one, currentColor, isFilled, strokeWidth);
             }
         });
 
@@ -55,7 +56,7 @@ public class Panel extends JPanel
 
     public void setFilled(boolean filled)
     {
-        controller.getCurrentShape().setFilled(filled);
+        this.isFilled = filled;
         repaint();
     }
 
@@ -64,7 +65,6 @@ public class Panel extends JPanel
     {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setStroke(new BasicStroke(strokeWidth));
 
         List<java.awt.Shape> shapes = new ArrayList<>(controller.translate());
         List<model.Shape> modelShapes = new ArrayList<>(controller.getModel().getShapes());
@@ -75,6 +75,7 @@ public class Panel extends JPanel
             model.Shape modelShape = modelShapes.get(i);
 
             graphics2D.setColor(modelShape.getColor());
+            graphics2D.setStroke(new BasicStroke(modelShape.getStrokeWidth()));
 
             if (modelShape.isFilled())
             {

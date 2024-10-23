@@ -8,6 +8,7 @@ public abstract class Shape
     private Point point2;
     private Color color;
     private boolean isFilled;
+    private int strokeWidth;
 
     public Shape(Point point1, Point point2)
     {
@@ -15,6 +16,7 @@ public abstract class Shape
         this.point2 = point2;
         this.color = Color.RED;
         this.isFilled = false;
+        this.strokeWidth = 3;
     }
 
     public Shape(Point point1, Point point2, Color color)
@@ -23,6 +25,7 @@ public abstract class Shape
         this.point2 = point2;
         this.color = color;
         this.isFilled = false;
+        this.strokeWidth = 3;
     }
 
     public Point getPoint1()
@@ -53,6 +56,16 @@ public abstract class Shape
     public void setColor(Color color)
     {
         this.color = color;
+    }
+
+    public int getStrokeWidth()
+    {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth)
+    {
+        this.strokeWidth = strokeWidth;
     }
 
     public boolean isFilled()

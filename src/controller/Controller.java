@@ -27,9 +27,9 @@ public class Controller
         return new Point(point2D.getX(), point2D.getY());
     }
 
-    public void createShape(Point point, Color color, boolean isFilled)
+    public void createShape(Point point, Color color, boolean isFilled, int strokeWidth)
     {
-        model.createShape(point, color, isFilled);
+        model.createShape(point, color, isFilled, strokeWidth);
     }
 
     public void stretchShape(Point point)

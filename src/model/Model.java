@@ -25,10 +25,12 @@ public class Model
         return current;
     }
 
-    public void createShape(Point point1, Color color, boolean isFilled)
+    public void createShape(Point point1, Color color, boolean isFilled, int strokeWidth)
     {
-        current = new Rectangle(point1, point1, color);
+        current = new Rectangle(point1, point1);
+        current.setColor(color);
         current.setFilled(isFilled);
+        current.setStrokeWidth(strokeWidth);
         shapes.add(current);
     }
 
