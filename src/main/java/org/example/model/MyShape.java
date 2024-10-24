@@ -14,7 +14,7 @@ public class MyShape {
     // конструктор по умолчанию
     public MyShape() {
         shape = new Rectangle2D.Double(); //фигура - прямоугольник
-        color = Color.BLUE; //цвет обводки
+        color = Color.red; //цвет обводки
         fillBehavior = FillBehavior.FILL;
     }
 
@@ -37,6 +37,7 @@ public class MyShape {
         g.setPaint(p);
     }
 
+
     //метод клонирования
     public MyShape clone(){
         MyShape s = new MyShape(); //создаем новую фигуру
@@ -48,5 +49,25 @@ public class MyShape {
 
         //возвращаем готовую копию
         return s;
+    }
+
+    public void setShape(RectangularShape shape) {
+        this.shape = shape;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setFillBehavior(FillBehavior fillBehavior) {
+        this.fillBehavior = fillBehavior;
+    }
+
+    public FillBehavior getFillBehavior() {
+        return fillBehavior;
     }
 }
