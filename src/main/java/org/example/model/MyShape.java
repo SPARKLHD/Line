@@ -33,6 +33,7 @@ public class MyShape {
         Paint p= g.getPaint();
         g.setColor(color);
         g.draw(shape);
+        g.fill(shape);
         g.setPaint(p);
     }
 
