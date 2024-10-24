@@ -33,18 +33,8 @@ public class Controller {
         Shape current = model.getCurrentShape(); //получаем текущую фигуру
         current.finishShape(point); //на каждое изменение положения зажатой мыши обновляем вторую точку
         panel.repaint(); // и перерисовываем в панели
+        model.add(current);
     }
-
-    //обработка действий мыши: отпускание кнопки
-    public void mouseReleased(Point point){
-        Shape current = model.getCurrentShape(); //получаем текущую фигуру
-        //TODO нужно ли заключительное обновление????
-        // current.finishShape(point); //устанавливаем последнюю точку
-        model.add(current); // добавляем фигуру в коллекцию модели
-        panel.repaint(); //перерисовываем снова
-        model.setCurrentShape(null); // фигура закончена, больше изменять её нельзя, ставим нулевой указатель
-    }
-
 
     //достаем коллекцию фигур из модели
     public Collection<Shape> translate(){

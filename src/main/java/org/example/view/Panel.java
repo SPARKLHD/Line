@@ -25,13 +25,6 @@ public class Panel extends JPanel {
                 super.mousePressed(e);
                 controller.mousePressed(e.getPoint()); //управление через контроллер
             }
-
-            //на отпускание кнопки
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
-                controller.mouseReleased(e.getPoint()); //управление через контроллер
-            }
         });
 
         //слушатель движения мыши
