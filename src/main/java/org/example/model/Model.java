@@ -6,12 +6,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Model {
+    private static Model model = null;
     MyShape currentMyShape; //текущая фигура
     Collection<MyShape> myShapes; //сюда складываем все фигуры
 
     //конструктор по умолчанию
-    public Model(){
+    private Model(){
         myShapes = new ArrayList<>();
+    }
+
+    public static Model getInstance(){
+        if (model == null){
+            model = new Model();
+        }
+        return model;
     }
 
     //для установки текущей фигура

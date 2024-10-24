@@ -19,7 +19,8 @@ public class Controller {
 
     //конструктор по умолчанию
     public Controller() {
-        model = new Model();
+        //model = new Model();
+        model = Model.getInstance();
         panel = new Panel(this);
         frame = new Frame(panel);
         points = new Point2D[2];
