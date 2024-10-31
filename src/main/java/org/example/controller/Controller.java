@@ -6,6 +6,7 @@ import org.example.model.MyShape;
 import org.example.view.Frame;
 import org.example.view.Panel;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
@@ -23,7 +24,7 @@ public class Controller {
     public Controller() {
         model = Model.getInstance(); // синглтон для того, чтоб модель точно была единственна
         panel = new Panel(this);
-        frame = new Frame(panel);
+        frame = new Frame(panel, this);
         model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
         actionDraw = new ActionDraw(model);
         actionDraw.setSampleShape(new MyShape(new Rectangle2D.Double(), Color.cyan));
@@ -44,5 +45,13 @@ public class Controller {
     //достаем коллекцию фигур из модели
     public Collection<MyShape> translate(){
         return model.getList();
+    }
+
+    public void setRectangle() {
+        actionDraw.setSampleShape(new MyShape(new Rectangle2D.Double(),Color.BLUE));
+    }
+
+    public void setEllipse() {
+        actionDraw.setSampleShape(new MyShape(new Ellipse2D.Double(), Color.cyan));
     }
 }
