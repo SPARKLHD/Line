@@ -39,8 +39,8 @@ public class Model {
     }
 
     //создать фигуру
-    public void createShape() {
-        currentMyShape = currentMyShape.clone();
+    public void createShape(MyShape shape) {
+        currentMyShape = shape;
         myShapes.add(currentMyShape);
     }
 

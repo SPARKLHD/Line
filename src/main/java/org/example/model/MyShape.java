@@ -18,6 +18,11 @@ public class MyShape {
         fillBehavior = FillBehavior.FILL;
     }
 
+    public MyShape(RectangularShape shape, Color color) {
+        this.shape = shape;
+        this.color = color;
+    }
+
     //геттер фигуры
     public RectangularShape getShape() {
         return shape;
