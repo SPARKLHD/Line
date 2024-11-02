@@ -37,18 +37,20 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                controller.setRectangle();
+               controller.setActionInterface(new ActionDraw());
            }
         });
         itemEll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                controller.setEllipse();
+               controller.setActionInterface(new ActionDraw());
            }
         });
 
 //////////////////////////////////////////
 
-        //создаем кнопку для смены действия СОЗДАТЬ/ПЕРЕТАЩИТЬ
+        //создаем кнопку для смены действия СОЗДАТЬ/ПЕРЕТАЩИТЬ/УДАЛИТЬ
         JMenu menu1 = new JMenu("action");
         menuBar.add(menu1);
 
@@ -80,6 +82,9 @@ public class Frame extends JFrame {
                 controller.setActionInterface(new ActionDelete());
             }
         });
+
+
+
 
 ///////////////////////////////////
 

@@ -7,6 +7,8 @@ import java.awt.geom.RectangularShape;
 
 //класс фигуры
 public class MyShape {
+    public Color colorDefault = Color.pink;
+
     RectangularShape shape; //объект прямоугольника
     Color color; //цвет
     FillBehavior fillBehavior;
@@ -14,13 +16,18 @@ public class MyShape {
     // конструктор по умолчанию
     public MyShape() {
         shape = new Rectangle2D.Double(); //фигура - прямоугольник
-        color = Color.red; //цвет обводки
+        color = colorDefault;
         fillBehavior = FillBehavior.FILL;
     }
 
     public MyShape(RectangularShape shape, Color color) {
         this.shape = shape;
         this.color = color;
+    }
+
+    public MyShape(RectangularShape shape) {
+        this.shape = shape;
+        this.color = colorDefault;
     }
 
     //геттер фигуры

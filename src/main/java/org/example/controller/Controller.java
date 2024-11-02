@@ -28,7 +28,7 @@ public class Controller {
         frame = new Frame(panel, this);
         model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
         actionInterface = new ActionDraw(model);
-        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double(), Color.cyan));
+        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double()));
 
     }
 

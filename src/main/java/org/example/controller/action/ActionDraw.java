@@ -23,14 +23,14 @@ public class ActionDraw implements ActionInterface{
 
     public ActionDraw() {
         p = new Point2D[2];
-        sampleShape = new MyShape(new Ellipse2D.Double(),Color.cyan);
+        sampleShape = new MyShape(new Ellipse2D.Double());
     }
 
     public ActionDraw(  Model model) {
         shape = new MyShape();
         this.p = new Point2D[2];
         this.model = model;
-        sampleShape = new MyShape(new Ellipse2D.Double(),Color.cyan);
+        sampleShape = new MyShape(new Ellipse2D.Double());
     }
 
     public void setShape(MyShape shape) {
