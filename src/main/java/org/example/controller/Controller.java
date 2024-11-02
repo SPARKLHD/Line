@@ -18,7 +18,6 @@ public class Controller {
     Panel panel;
     Frame frame;
     public Model model;
-    //ActionDraw actionDraw;
     ActionInterface actionInterface;
 
     //конструктор по умолчанию
@@ -60,4 +59,8 @@ public class Controller {
         actionInterface.setSampleShape(new MyShape(new Ellipse2D.Double(), model.getCurrentShape().getColor()));
     }
 
+    public void deleteAll() {
+        model.deleteAll();
+        panel.repaint();
+    }
 }

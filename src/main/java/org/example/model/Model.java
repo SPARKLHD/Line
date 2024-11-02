@@ -52,4 +52,8 @@ public class Model {
     public void delete(MyShape x) {
         myShapes.remove(x);
     }
+
+    public void deleteAll() {
+        myShapes.clear();
+    }
 }

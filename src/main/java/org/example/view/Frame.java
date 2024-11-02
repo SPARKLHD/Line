@@ -88,6 +88,14 @@ public class Frame extends JFrame {
 
 ///////////////////////////////////
 
+        JMenuItem deleteAll = new JMenuItem("Delete all");
+        menuBar.add(deleteAll);
+        deleteAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.deleteAll();
+            }
+        });
 
 
         //настройки окна
