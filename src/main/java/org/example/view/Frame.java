@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 
 public class Frame extends JFrame {
     Panel panel; //для доступа к панели
@@ -36,15 +37,15 @@ public class Frame extends JFrame {
         itemRec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               controller.setRectangle();
                controller.setActionInterface(new ActionDraw());
+                controller.setRectangle();
            }
         });
         itemEll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               controller.setEllipse();
                controller.setActionInterface(new ActionDraw());
+               controller.setEllipse();
            }
         });
 

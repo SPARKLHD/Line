@@ -23,8 +23,17 @@ public class ActionDraw implements ActionInterface{
 
     public ActionDraw() {
         p = new Point2D[2];
-        sampleShape = new MyShape(new Ellipse2D.Double());
     }
+
+    public ActionDraw(MyShape sampleShape) {
+        p = new Point2D[2];
+        this.sampleShape = sampleShape;
+
+    }
+
+
+
+
 
     public ActionDraw(  Model model) {
         shape = new MyShape();
