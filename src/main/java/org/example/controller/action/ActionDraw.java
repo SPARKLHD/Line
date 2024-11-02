@@ -4,9 +4,10 @@ import org.example.model.Model;
 import org.example.model.MyShape;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
-public class ActionDraw {
+public class ActionDraw implements ActionInterface{
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
@@ -16,14 +17,20 @@ public class ActionDraw {
         this.sampleShape = sampleShape;
     }
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
     public ActionDraw() {
         p = new Point2D[2];
+        sampleShape = new MyShape(new Ellipse2D.Double(),Color.cyan);
     }
 
     public ActionDraw(  Model model) {
         shape = new MyShape();
         this.p = new Point2D[2];
         this.model = model;
+        sampleShape = new MyShape(new Ellipse2D.Double(),Color.cyan);
     }
 
     public void setShape(MyShape shape) {
@@ -40,4 +47,13 @@ public class ActionDraw {
     }
 
 
+    @Override
+    public void mousePressed(Point point) {
+        createShape(point);
+    }
+
+    @Override
+    public void mouseDragged(Point point) {
+        stretchShape(point);
+    }
 }

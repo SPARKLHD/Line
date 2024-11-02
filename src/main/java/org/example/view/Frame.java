@@ -1,6 +1,8 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.controller.action.ActionDraw;
+import org.example.controller.action.ActionMove;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,13 +58,13 @@ public class Frame extends JFrame {
         actionMove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.setMove();
+                controller.setActionInterface(new ActionMove());
             }
         });
         actionDraw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.setDraw();
+                controller.setActionInterface(new ActionDraw());
             }
         });
 
