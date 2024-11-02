@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.controller.action.ActionDelete;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
 
@@ -23,6 +24,8 @@ public class Frame extends JFrame {
         JMenu menu = new JMenu("shape");
         menuBar.add(menu); //добавляем в полосу
 
+///////////////////////////////
+
         //выпадающий список из кнопки
         JMenuItem itemRec = new JMenuItem("rectangle");
         JMenuItem itemEll = new JMenuItem("ellipse");
@@ -43,6 +46,7 @@ public class Frame extends JFrame {
            }
         });
 
+//////////////////////////////////////////
 
         //создаем кнопку для смены действия СОЗДАТЬ/ПЕРЕТАЩИТЬ
         JMenu menu1 = new JMenu("action");
@@ -51,8 +55,10 @@ public class Frame extends JFrame {
         //создаем выпадающие кнопки из action
         JMenuItem actionDraw = new JMenuItem("draw");
         JMenuItem actionMove = new JMenuItem("move");
+        JMenuItem actionDelete = new JMenuItem("delete");
         menu1.add(actionDraw);
         menu1.add(actionMove);
+        menu1.add(actionDelete);
 
         //слушатели для кнопок
         actionMove.addActionListener(new ActionListener() {
@@ -67,6 +73,15 @@ public class Frame extends JFrame {
                 controller.setActionInterface(new ActionDraw());
             }
         });
+
+        actionDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setActionInterface(new ActionDelete());
+            }
+        });
+
+///////////////////////////////////
 
 
 

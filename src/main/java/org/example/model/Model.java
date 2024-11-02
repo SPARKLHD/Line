@@ -48,4 +48,8 @@ public class Model {
     public void setFrame(Point2D[] points) {
         currentMyShape.createShape(points);
     }
+
+    public void delete(MyShape x) {
+        myShapes.remove(x);
+    }
 }
