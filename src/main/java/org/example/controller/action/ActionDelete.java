@@ -23,6 +23,7 @@ public class ActionDelete implements ActionInterface{
         Point2D p1 = point;
         p[0] = p1;
         Collection<MyShape> list = model.getList();
+
         // Используем итератор для безопасного удаления
         Iterator<MyShape> iterator = list.iterator();
         while (iterator.hasNext()) {
