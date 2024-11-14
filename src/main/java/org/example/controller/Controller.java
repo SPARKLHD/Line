@@ -18,32 +18,30 @@ public class Controller {
     Panel panel;
     Frame frame;
     public Model model;
-    ActionInterface actionInterface;
-    State state = new State();
+
+    State state;
     //конструктор по умолчанию
     public Controller() {
+
         model = Model.getInstance(); // синглтон для того, чтоб модель точно была единственна
+        state =new State(model);
         panel = new Panel(this);
         frame = new Frame(panel, state);
         model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
-        actionInterface = new ActionDraw(model);
-        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double()));
+
 
     }
 
-    public void setActionInterface(ActionInterface actionInterface){
-        this.actionInterface = actionInterface;
-        actionInterface.setModel(model);
-    }
+
 
     //обработка действий мыши: нажатие кнопки
     public void mousePressed(Point point){
-         actionInterface.mousePressed(point);
+         state.getActionInterface().mousePressed(point);
     }
 
     //обработка действий мыши: перемещение
     public void mouseDragged(Point point){
-        actionInterface.mouseDragged(point);
+        state.getActionInterface().mouseDragged(point);
     }
 
     //достаем коллекцию фигур из модели
@@ -51,13 +49,13 @@ public class Controller {
         return model.getList();
     }
 
-    public void setRectangle() {
-        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double(),model.getCurrentShape().getColor()));
-    }
-
-    public void setEllipse() {
-        actionInterface.setSampleShape(new MyShape(new Ellipse2D.Double(), model.getCurrentShape().getColor()));
-    }
+//    public void setRectangle() {
+//        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double(),model.getCurrentShape().getColor()));
+//    }
+//
+//    public void setEllipse() {
+//        actionInterface.setSampleShape(new MyShape(new Ellipse2D.Double(), model.getCurrentShape().getColor()));
+//    }
 
     public void deleteAll() {
         model.deleteAll();

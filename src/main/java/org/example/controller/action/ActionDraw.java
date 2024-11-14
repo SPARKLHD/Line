@@ -32,9 +32,6 @@ public class ActionDraw implements ActionInterface{
     }
 
 
-
-
-
     public ActionDraw(  Model model) {
         shape = new MyShape();
         this.p = new Point2D[2];
@@ -65,4 +62,5 @@ public class ActionDraw implements ActionInterface{
     public void mouseDragged(Point point) {
         stretchShape(point);
     }
+
 }
