@@ -19,12 +19,12 @@ public class Controller {
     Frame frame;
     public Model model;
     ActionInterface actionInterface;
-
+    State state = new State();
     //конструктор по умолчанию
     public Controller() {
         model = Model.getInstance(); // синглтон для того, чтоб модель точно была единственна
         panel = new Panel(this);
-        frame = new Frame(panel, this);
+        frame = new Frame(panel, state);
         model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
         actionInterface = new ActionDraw(model);
         actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double()));
