@@ -1,105 +1,41 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.controller.State;
 import org.example.controller.action.ActionDelete;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
+import org.example.view.menu.SwitchShape;
+import org.example.view.menu.SwitchState;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public class Frame extends JFrame {
     Panel panel; //для доступа к панели
-    Controller controller; //доступ к контроллеру для кнопок
+//    Controller controller; //доступ к контроллеру для кнопок
+        State state;
 
-    public Frame(Panel panel, Controller controller) throws HeadlessException {
-        this.controller = controller;
-
+    public Frame(Panel panel, State state) {
+        this.panel = panel;
+        this.state = state;
+        ArrayList <Action> menuItem = new ArrayList<Action>();
+        menuItem.add(new SwitchState("Rectangle",null,new SwitchShape(state,new Rectangle2D.Double())));
+        menuItem.add(new SwitchState("Ellipse",null,new SwitchShape(state, new Ellipse2D.Double())));
+        JMenu menu = new JMenu("shape");
+        menu.add(menuItem.get(0));
+        menu.add(menuItem.get(1));
         JMenuBar menuBar = new JMenuBar(); //верхняя полоса для меню
         setJMenuBar(menuBar); //установка созданного меню
-
-        //создаем кнопку для смены фигуры в меню
-        JMenu menu = new JMenu("shape");
-        menuBar.add(menu); //добавляем в полосу
-
-///////////////////////////////
-
-        //выпадающий список из кнопки
-        JMenuItem itemRec = new JMenuItem("rectangle");
-        JMenuItem itemEll = new JMenuItem("ellipse");
-        menu.add(itemRec);
-        menu.add(itemEll);
-
-        //слушатели для кнопок
-        itemRec.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               controller.setActionInterface(new ActionDraw());
-                controller.setRectangle();
-           }
-        });
-        itemEll.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               controller.setActionInterface(new ActionDraw());
-               controller.setEllipse();
-           }
-        });
-
-//////////////////////////////////////////
-
-        //создаем кнопку для смены действия СОЗДАТЬ/ПЕРЕТАЩИТЬ/УДАЛИТЬ
-        JMenu menu1 = new JMenu("action");
-        menuBar.add(menu1);
-
-        //создаем выпадающие кнопки из action
-        JMenuItem actionDraw = new JMenuItem("draw");
-        JMenuItem actionMove = new JMenuItem("move");
-        JMenuItem actionDelete = new JMenuItem("delete");
-        menu1.add(actionDraw);
-        menu1.add(actionMove);
-        menu1.add(actionDelete);
-
-        //слушатели для кнопок
-        actionMove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.setActionInterface(new ActionMove());
-            }
-        });
-        actionDraw.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.setActionInterface(new ActionDraw());
-            }
-        });
-
-        actionDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.setActionInterface(new ActionDelete());
-            }
-        });
+        menuBar.add(menu);
 
 
-
-
-///////////////////////////////////
-
-        JMenuItem deleteAll = new JMenuItem("Delete all");
-        menuBar.add(deleteAll);
-        deleteAll.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.deleteAll();
-            }
-        });
-
-
-        //настройки окна
+        /////////////////////////////////////////////////
         setVisible(true); //видимость
         setResizable(false); //запрет изменения размера окна
         setSize(1000,1000); //размер окна

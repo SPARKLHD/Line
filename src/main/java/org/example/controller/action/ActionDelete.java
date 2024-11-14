@@ -24,7 +24,7 @@ public class ActionDelete implements ActionInterface{
         p[0] = p1;
         Collection<MyShape> list = model.getList();
 
-        // Используем итератор для безопасного удаления
+        // спользуем итератор для безопасного удаления
         Iterator<MyShape> iterator = list.iterator();
         while (iterator.hasNext()) {
             MyShape x = iterator.next();
