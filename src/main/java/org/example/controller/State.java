@@ -16,7 +16,7 @@ public class State {
     Model model;
 
     public State( Model model) {
-        myShape = new MyShape(new Rectangle2D.Double(), Color.BLACK);
+        myShape = new MyShape(new Rectangle2D.Double(), Color.pink);
         this.actionInterface = new ActionDraw(model);
         this.model = model;
     }

@@ -7,6 +7,8 @@ import org.example.view.menu.SwitchAction;
 import org.example.view.menu.SwitchShape;
 import org.example.view.menu.SwitchState;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -38,6 +40,14 @@ public class Frame extends JFrame {
         JMenu menuShape = new JMenu("Shape");
         menuBar.add(menuShape);
         for (Action s: menuItemShape){menuShape.add(s);}
+
+        JButton deleteAll = new JButton("DeleteAll");
+        deleteAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAll();
+            }
+        });
 
 
 
