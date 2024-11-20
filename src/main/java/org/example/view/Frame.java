@@ -1,6 +1,4 @@
 package org.example.view;
-
-import org.example.controller.Controller;
 import org.example.controller.State;
 import org.example.controller.action.ActionDelete;
 import org.example.controller.action.ActionDraw;
@@ -8,40 +6,40 @@ import org.example.controller.action.ActionMove;
 import org.example.view.menu.SwitchAction;
 import org.example.view.menu.SwitchShape;
 import org.example.view.menu.SwitchState;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Frame extends JFrame {
     Panel panel; //для доступа к панели
-//    Controller controller; //доступ к контроллеру для кнопок
         State state;
 
     public Frame(Panel panel, State state) {
         this.panel = panel;
         this.state = state;
-        ArrayList <Action> menuItem = new ArrayList<Action>();
-        menuItem.add(new SwitchState("Rectangle",null,new SwitchShape(state,new Rectangle2D.Double())));
-        menuItem.add(new SwitchState("Ellipse",null,new SwitchShape(state, new Ellipse2D.Double())));
-        menuItem.add(new SwitchState("Draw",null,
-                new SwitchAction(state, new ActionDraw())));
-        String arr[] = {"shape","Action","Fill","color"};
-        ArrayList<JMenu> menu = new ArrayList<>();
-        for(String s:arr){
-            menu.add(new JMenu(s));
-        }
-       // JMenu menu = new JMenu("shape");
-        menu.get(0).add(menuItem.get(0));
-        menu.add(menuItem.get(1));
+        ArrayList <Action> menuItemAction = new ArrayList<Action>();
+        menuItemAction.add(new SwitchState("Draw",null, new SwitchAction(state, new ActionDraw())));
+        menuItemAction.add(new SwitchState("Move",null,new SwitchAction(state, new ActionMove())));
+        menuItemAction.add(new SwitchState("Delete",null,new SwitchAction(state, new ActionDelete())));
 
-        JMenuBar menuBar = new JMenuBar(); //верхняя полоса для меню
-        setJMenuBar(menuBar); //установка созданного меню
-        menuBar.add(menu);
+        ArrayList <Action> menuItemShape = new ArrayList<Action>();
+        menuItemShape.add(new SwitchState("Rectangle",null,new SwitchShape(state,new Rectangle2D.Double())));
+        menuItemShape.add(new SwitchState("Ellipse",null,new SwitchShape(state, new Ellipse2D.Double())));
+
+
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu menuAction = new JMenu("Action");
+        menuBar.add(menuAction);
+        for (Action s: menuItemAction){menuAction.add(s);}
+
+        JMenu menuShape = new JMenu("Shape");
+        menuBar.add(menuShape);
+        for (Action s: menuItemShape){menuShape.add(s);}
+
+
 
 
         /////////////////////////////////////////////////
