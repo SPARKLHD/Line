@@ -16,4 +16,9 @@ public class SwitchShape implements Command {
     public void execute() {
         state.setRectangularShape(shape);
     }
+
+    @Override
+    public void unexecute() {
+
+    }
 }

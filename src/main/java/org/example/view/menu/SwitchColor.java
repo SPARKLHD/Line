@@ -20,4 +20,9 @@ public class SwitchColor implements Command{
         c = JColorChooser.showDialog(null,"Choose color", Color.black);
         state.setColor(c);
     }
+
+    @Override
+    public void unexecute() {
+
+    }
 }

@@ -19,19 +19,20 @@ public class State {
         myShape = new MyShape(new Rectangle2D.Double(), Color.pink);
         this.actionInterface = new ActionDraw(model);
         this.model = model;
+        actionInterface.setSampleShape(myShape);
     }
 
     public void setRectangularShape(RectangularShape shape) {
 
        // this.shape = shape;
         myShape.setShape(shape);
-        actionInterface.setSampleShape(myShape);
+      //  actionInterface.setSampleShape(myShape);
     }
 
     public void setAction(ActionInterface actionInterface) {
 
         this.actionInterface = actionInterface;
-        this.actionInterface.setModel(model);
+       // this.actionInterface.setModel(model);
     }
 
     public ActionInterface getActionInterface() {
@@ -40,6 +41,6 @@ public class State {
 
     public void setColor(Color c) {
         myShape.setColor(c);
-        actionInterface.setSampleShape(myShape);
+       // actionInterface.setSampleShape(myShape);
     }
 }

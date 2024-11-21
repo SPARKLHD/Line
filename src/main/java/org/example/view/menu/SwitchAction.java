@@ -15,4 +15,9 @@ public class SwitchAction implements Command{
     public void execute() {
         state.setAction(actionInterface);
     }
+
+    @Override
+    public void unexecute() {
+
+    }
 }
