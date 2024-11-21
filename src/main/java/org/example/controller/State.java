@@ -37,4 +37,9 @@ public class State {
     public ActionInterface getActionInterface() {
         return actionInterface;
     }
+
+    public void setColor(Color c) {
+        myShape.setColor(c);
+        actionInterface.setSampleShape(myShape);
+    }
 }

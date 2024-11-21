@@ -7,6 +7,7 @@ import java.awt.*;
 
 //интерфейс действий
 public interface ActionInterface {
+
     //нажатие
     void mousePressed(Point point);
     //удерживание

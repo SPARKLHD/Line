@@ -6,12 +6,15 @@ import org.example.model.MyShape;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 public class ActionDraw implements ActionInterface{
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
     Model model;
+
+
 
     public void setSampleShape(MyShape sampleShape) {
         this.sampleShape = sampleShape;
@@ -23,6 +26,7 @@ public class ActionDraw implements ActionInterface{
 
     public ActionDraw() {
         p = new Point2D[2];
+        sampleShape = new MyShape(new Rectangle2D.Double());
     }
 
     public ActionDraw(MyShape sampleShape) {
