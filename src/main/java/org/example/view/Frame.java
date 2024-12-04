@@ -4,12 +4,11 @@ import org.example.controller.action.ActionDelete;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
 import org.example.model.FillBehavior;
+import org.example.model.undomachine.UndoRMachine;
 import org.example.view.menu.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -17,9 +16,11 @@ import java.util.ArrayList;
 public class Frame extends JFrame {
     Panel panel; //для доступа к панели
     State state;
+    UndoRMachine undoRMachine;
 
-    public Frame(Panel panel, State state) {
+    public Frame(Panel panel, State state, UndoRMachine undoRMachine) {
         this.panel = panel;
+        this.undoRMachine = undoRMachine;
         this.state = state;
         ArrayList <Action> menuItem = new ArrayList<Action>();
         menuItem.add(new SwitchState("Draw",null, new SwitchAction(state, new ActionDraw())));
@@ -30,7 +31,11 @@ public class Frame extends JFrame {
         menuItem.add(new SwitchState("ChooseColor",null,new SwitchColor(state)));
         menuItem.add(new SwitchState("Fill",null,new SwitchFill(FillBehavior.FILL,state)));
         menuItem.add(new SwitchState("NoFill",null,new SwitchFill(FillBehavior.NOFILL,state)));
-
+        menuItem.add(new SwitchUndo("undo", null, undoRMachine)); // `SwitchUndo`
+        menuItem.add(new SwitchRedo("redo", null, undoRMachine)); // `SwitchRedo`
+        undoRMachine.addObserver((SwitchUndo)menuItem.get(menuItem.size()-3));
+        undoRMachine.addObserver((SwitchRedo)menuItem.get(menuItem.size()-2));
+        undoRMachine.notifyMenu();
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         int i=0;

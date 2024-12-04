@@ -8,13 +8,28 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 
-public class ActionMove implements ActionInterface {
+public class ActionMove extends ActionInterface {
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
     Model model;
 
     public void setSampleShape(MyShape sampleShape) {}
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
+    public void unexecute() {
+
+    }
+
+    @Override
+    public ActionInterface myclone() {
+        return null;
+    }
 
     @Override
     public void setModel(Model model) {

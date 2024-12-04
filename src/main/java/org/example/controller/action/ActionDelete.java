@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class ActionDelete implements ActionInterface{
+public class ActionDelete extends ActionInterface {
     Controller controller;
     MyShape sampleShape;
     MyShape shape;
@@ -47,6 +47,21 @@ public class ActionDelete implements ActionInterface{
     @Override
     public void setSampleShape(MyShape myShape) {
         this.sampleShape = myShape;
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
+    public void unexecute() {
+
+    }
+
+    @Override
+    public ActionInterface myclone() {
+        return null;
     }
 
     @Override

@@ -48,4 +48,8 @@ public class State {
         myShape.setFillBehavior(fb);
         actionInterface.setSampleShape(myShape);
     }
+
+    public ActionInterface getAction() {
+        return actionInterface;
+    }
 }

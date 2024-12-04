@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class ActionDraw implements ActionInterface{
+public class ActionDraw extends ActionInterface {
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
@@ -18,6 +18,21 @@ public class ActionDraw implements ActionInterface{
 
     public void setSampleShape(MyShape sampleShape) {
         this.sampleShape = sampleShape;
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
+    public void unexecute() {
+
+    }
+
+    @Override
+    public ActionInterface myclone() {
+        return null;
     }
 
     public void setModel(Model model) {

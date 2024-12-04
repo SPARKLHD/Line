@@ -12,7 +12,7 @@ public class Model {
     Collection<MyShape> myShapes; //сюда складываем все фигуры
 
     //конструктор по умолчанию
-    private Model(){
+    public Model(){
         myShapes = new ArrayList<>(); //создаем коллекцию фигур
     }
 
