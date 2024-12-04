@@ -1,28 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.example.view.menu;
 
-import org.example.controller.State;
+import java.awt.Color;
+import javax.swing.JColorChooser;
+import org.example.controller.state.State;
 
-import javax.swing.*;
-import java.awt.*;
+/**
+ *
+ * @author Netbeans
+ */
+public class SwitchColor implements Command {
 
-public class SwitchColor implements Command{
-    State state;
     Color c;
+    State state;
 
     public SwitchColor(State state) {
         this.state = state;
     }
 
-
-
     @Override
     public void execute() {
-        c = JColorChooser.showDialog(null,"Choose color", Color.black);
+        Color c = JColorChooser.showDialog(null, "choose color", Color.BLACK);
         state.setColor(c);
-    }
-
-    @Override
-    public void unexecute() {
-
     }
 }

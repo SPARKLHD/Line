@@ -1,60 +1,35 @@
 package org.example.model;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Observable;
 
-public class Model {
-    private static Model model = null;
-    MyShape currentMyShape; //текущая фигура
-    Collection<MyShape> myShapes; //сюда складываем все фигуры
+public class Model  {
+    MyShape currentShape;
+    Collection<MyShape> list;
 
-    //конструктор по умолчанию
-    public Model(){
-        myShapes = new ArrayList<>(); //создаем коллекцию фигур
+    public Model() {
+       list = new ArrayList<>();
     }
 
-    //конструктор синглтона
-    public static Model getInstance(){
-        if (model == null){
-            model = new Model();
-        }
-        return model;
+    public void setCurrentShape(MyShape currentShape) {
+        this.currentShape = currentShape;
     }
 
-    //для установки текущей фигура
-    public void setCurrentShape(MyShape currentMyShape) {
-        this.currentMyShape = currentMyShape;
+    public void createCurrentShape(MyShape shape) {
+        currentShape = shape;
+        list.add(currentShape);
+
     }
 
-    //получаем текущую фигуру
     public MyShape getCurrentShape() {
-        return currentMyShape;
+        return currentShape;
     }
 
-    //для получения коллекции фигур
     public Collection<MyShape> getList() {
-        return myShapes;
+        return list;
     }
 
-    //создать фигуру
-    public void createShape(MyShape shape) {
-        currentMyShape = shape;
-        myShapes.add(currentMyShape);
-    }
 
-    //установить размер
-    public void setFrame(Point2D[] points) {
-        currentMyShape.createShape(points);
-    }
 
-    public void delete(MyShape x) {
-        myShapes.remove(x);
-    }
-
-    public void deleteAll() {
-        myShapes.clear();
-    }
 }

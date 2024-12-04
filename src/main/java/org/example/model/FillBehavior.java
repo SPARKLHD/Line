@@ -5,7 +5,7 @@ import java.awt.geom.RectangularShape;
 
 public enum FillBehavior {
     FILL(){
-        void draw(Graphics2D g, RectangularShape s){
+        void draw(Graphics2D g,RectangularShape s){
             g.fill(s);
         }
     },

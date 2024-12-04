@@ -1,28 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.example.view.menu;
 
-import org.example.model.undomachine.UndoRMachine;
 
-import javax.swing.*;
+import org.example.model.undomachine.UndoMachine;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.AbstractAction;
+import javax.swing.Icon;
 
-public class SwitchUndo extends AbstractAction implements Observer {
+/**
+ *
+ * @author Wera
+ */
+public class SwitchUndo extends AbstractAction implements Observer{
 
-    public SwitchUndo(String name, Icon icon, UndoRMachine machine) {
+    public SwitchUndo(String name, Icon icon, UndoMachine machine) {
         super(name, icon);
-        putValue("machine", machine);
+        putValue("machine", machine);        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        UndoRMachine m = (UndoRMachine)getValue("machine");
-        if (this.isEnabled()) m.unexecute();
+        UndoMachine m = (UndoMachine)getValue("machine");
+        if (this.isEnabled()) m.unexecute();   
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        UndoRMachine.UndoRedoButtonState buttonState = (UndoRMachine.UndoRedoButtonState) arg;
+        UndoMachine.UndoRedoButtonState buttonState = (UndoMachine.UndoRedoButtonState) arg;
         this.setEnabled(buttonState.undo);
-    }
+    }  
 }

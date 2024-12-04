@@ -1,28 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.example.model.undomachine;
 
-import org.example.controller.action.ActionInterface;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import org.example.controller.action.ActionInterface;
 
-public class UndoRMachine extends Observable {
+/**
+ *
+ * @author Wera
+ */
+public class UndoMachine extends Observable {
     public enum UndoRedoButtonState {
 
-        EUndoERedo(true, true), DUndoDRedo(false, false), EUndoDRedo(true, false), DUndoERedo(false, true);
-        public boolean undo;
-        public boolean redo;
+    EUndoERedo(true, true), DUndoDRedo(false, false), EUndoDRedo(true, false), DUndoERedo(false, true);
+    public boolean undo;
+    public boolean redo;
 
-        UndoRedoButtonState(boolean u, boolean r) {
-            undo = u;
-            redo = r;
-        }
+    UndoRedoButtonState(boolean u, boolean r) {
+        undo = u;
+        redo = r;
     }
+}
     private class StateDUndoDRedo extends UndoRedoState {
 
         public StateDUndoDRedo() {
             super(UndoRedoButtonState.DUndoDRedo);
         }
-
+        
         @Override
         public void undo() {
         }
@@ -78,7 +87,7 @@ public class UndoRMachine extends Observable {
     }
 
     private class UndoRedoState {
-
+        
         UndoRedoButtonState buttonState;
 
         public UndoRedoState(UndoRedoButtonState buttonState) {
@@ -87,8 +96,8 @@ public class UndoRMachine extends Observable {
 
         public UndoRedoButtonState getButtonState() {
             return buttonState;
-        }
-
+        } 
+        
         void undo() {
             activityList.get(undoIterator).unexecute();
             undoIterator--;
@@ -135,7 +144,7 @@ public class UndoRMachine extends Observable {
         }
     }
     ArrayList<ActionInterface> activityList;
-
+    
     UndoRedoState stateDUndoDRedo;
     UndoRedoState stateEUndoERedo;
     UndoRedoState stateDUndoERedo;
@@ -143,7 +152,7 @@ public class UndoRMachine extends Observable {
     UndoRedoState state;
     int undoIterator;
 
-    public UndoRMachine() {
+    public UndoMachine() {
 
         activityList = new ArrayList<>();
         stateDUndoDRedo = new StateDUndoDRedo();
