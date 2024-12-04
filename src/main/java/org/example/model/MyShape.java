@@ -11,18 +11,23 @@ public class MyShape {
 
     RectangularShape shape; //объект прямоугольника
     Color color; //цвет
-    FillBehavior fillBehavior;
+    FillBehavior fillBehavior = FillBehavior.NOFILL;
 
     // конструктор по умолчанию
     public MyShape() {
         shape = new Rectangle2D.Double(); //фигура - прямоугольник
         color = colorDefault;
-        fillBehavior = FillBehavior.FILL;
     }
 
     public MyShape(RectangularShape shape, Color color) {
         this.shape = shape;
         this.color = color;
+    }
+
+    public MyShape(Color blue, Rectangle2D.Double aDouble, FillBehavior fillBehavior) {
+        color = Color.BLACK;
+        shape = new Rectangle2D.Double();
+        this.fillBehavior = fillBehavior;
     }
 
     public MyShape(RectangularShape shape) {
@@ -44,8 +49,7 @@ public class MyShape {
     public void draw(Graphics2D g) {
         Paint p= g.getPaint();
         g.setColor(color);
-        g.draw(shape);
-        g.fill(shape);
+        fillBehavior.draw(g,shape);
         g.setPaint(p);
     }
 

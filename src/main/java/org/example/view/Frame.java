@@ -3,10 +3,9 @@ import org.example.controller.State;
 import org.example.controller.action.ActionDelete;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
-import org.example.view.menu.SwitchAction;
-import org.example.view.menu.SwitchColor;
-import org.example.view.menu.SwitchShape;
-import org.example.view.menu.SwitchState;
+import org.example.model.FillBehavior;
+import org.example.view.menu.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 public class Frame extends JFrame {
     Panel panel; //для доступа к панели
-        State state;
+    State state;
 
     public Frame(Panel panel, State state) {
         this.panel = panel;
@@ -29,6 +28,8 @@ public class Frame extends JFrame {
         menuItem.add(new SwitchState("Rectangle",null,new SwitchShape(state,new Rectangle2D.Double())));
         menuItem.add(new SwitchState("Ellipse",null,new SwitchShape(state, new Ellipse2D.Double())));
         menuItem.add(new SwitchState("ChooseColor",null,new SwitchColor(state)));
+        menuItem.add(new SwitchState("Fill",null,new SwitchFill(FillBehavior.FILL,state)));
+        menuItem.add(new SwitchState("NoFill",null,new SwitchFill(FillBehavior.NOFILL,state)));
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -51,6 +52,7 @@ public class Frame extends JFrame {
         this.add(jToolBar, BorderLayout.NORTH);
         for(Action x:menuItem)
             jToolBar.add(x);
+
 
 
         /////////////////////////////////////////////////
