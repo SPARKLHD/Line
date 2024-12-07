@@ -16,7 +16,7 @@ public class MyRectangle extends MyShape
     {
         if (points.length < 2)
         {
-            throw new IllegalArgumentException("At least two points are required to define a rectangle.");
+            throw new IllegalArgumentException("Для определения прямоугольника необходимы как минимум две точки.");
         }
 
         ((Rectangle2D) shape).setFrameFromDiagonal(points[0], points[1]);

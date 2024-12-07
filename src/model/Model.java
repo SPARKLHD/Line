@@ -11,7 +11,7 @@ public class Model
     private int strokeWidth = 3;
     private Color currentColor = Color.BLACK;
     private FillBehavior fillBehavior = FillBehavior.EMPTY;
-    private ShapseEnum currentShapeType = ShapseEnum.RECTANGLE;
+    private ShapseEnum currentShapeType = ShapseEnum.LINE;
 
     private final List<MyShape> shapes = new ArrayList<>();
 

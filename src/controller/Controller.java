@@ -2,8 +2,8 @@ package controller;
 
 import model.*;
 import java.awt.*;
-import view.Panel;
-import view.Frame;
+import view.MyPanel;
+import view.MyFrame;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Collection;
@@ -21,22 +21,21 @@ public class Controller
     private Controller()
     {
         model = new Model();
-        Panel panel = new Panel(this);
-        new Frame(panel, this);
+        MyPanel panel = new MyPanel(this);
+        new MyFrame(panel, this);
         currentState = new State();
         currentAction = new ActionDraw(model);
         currentState.actionInterface = currentAction;
 
     }
 
-    public static Controller getInstance()
+    public static void getInstance()
     {
         if (instance == null)
         {
             instance = new Controller();
         }
 
-        return instance;
     }
 
     public void setupMouseListeners(JPanel panel)

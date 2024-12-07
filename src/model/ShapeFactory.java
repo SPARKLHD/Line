@@ -9,9 +9,7 @@ public class ShapeFactory
         MyShape shape = switch (shapeType)
         {
             case LINE -> new MyLine(color, 1);
-            case CIRCLE -> new MyCircle(color, 1);
             case ELLIPSE -> new MyEllipse(color, 1);
-            case TRIANGLE -> new MyTriangle(color, 1);
             case RECTANGLE -> new MyRectangle(color, 1);
         };
 
