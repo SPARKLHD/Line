@@ -16,7 +16,7 @@ public class MyEllipse extends MyShape
     {
         if (points.length < 2)
         {
-            throw new IllegalArgumentException("At least two points are required to define a ellipse.");
+            throw new IllegalArgumentException("Для определения эллипса необходимы как минимум две точки.");
         }
 
         ((Ellipse2D) shape).setFrameFromDiagonal(points[0], points[1]);
