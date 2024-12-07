@@ -16,7 +16,7 @@ public class MyLine extends MyShape
     {
         if (points.length < 2)
         {
-            throw new IllegalArgumentException("At least two points are required to define a line.");
+            throw new IllegalArgumentException("Для определения линии необходимы как минимум две точки.");
         }
 
         ((Line2D) shape).setLine(points[0], points[1]);
