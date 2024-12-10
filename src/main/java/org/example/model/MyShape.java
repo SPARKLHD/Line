@@ -1,11 +1,8 @@
 package org.example.model;
 
 import java.awt.*;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 import java.awt.Shape;
-import java.awt.geom.RectangularShape;
 
 public class MyShape {
     private Color color;
@@ -90,6 +87,9 @@ public class MyShape {
         } else if (this.shape instanceof Line2D) {
             Line2D line = (Line2D) this.shape;
             s.setShape(new Line2D.Double(line.getP1(), line.getP2()));
+        } else if (this.shape instanceof Ellipse2D) {
+            Ellipse2D ellipse = (Ellipse2D) this.shape;
+            s.setShape(new Ellipse2D.Double(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight()));
         } else {
             throw new UnsupportedOperationException("Cloning not supported for this shape type: " + shape.getClass());
         }

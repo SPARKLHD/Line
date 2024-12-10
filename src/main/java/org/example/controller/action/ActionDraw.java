@@ -72,10 +72,27 @@ public class ActionDraw extends ActionInterface {
 
     public void stretchShape(Point point) {
         p[1] = (Point2D) point;
+
         try {
-            shape.setFrame(p); // Метод setFrame проверяет тип фигуры
+            // Получаем внутреннюю фигуру из MyShape
+            Shape innerShape = shape.getShape();
+
+            if (innerShape instanceof Rectangle2D) {
+                Rectangle2D rect = (Rectangle2D) innerShape;
+                rect.setFrame(p[0].getX(), p[0].getY(), p[1].getX() - p[0].getX(), p[1].getY() - p[0].getY());  // Растягиваем прямоугольник
+            } else if (innerShape instanceof Ellipse2D) {
+                Ellipse2D ellipse = (Ellipse2D) innerShape;
+                double width = p[1].getX() - p[0].getX();
+                double height = p[1].getY() - p[0].getY();
+                shape.setShape(new Ellipse2D.Double(p[0].getX(), p[0].getY(), width, height));  // Создаем новый эллипс
+            } else if (innerShape instanceof Line2D) {
+                Line2D line = (Line2D) innerShape;
+                line.setLine(p[0], p[1]);  // Растягиваем линию
+            } else {
+                throw new UnsupportedOperationException("Unsupported shape type for stretching: " + innerShape.getClass());
+            }
         } catch (UnsupportedOperationException e) {
-            System.err.println("Unsupported shape type for stretching: " + shape.getShape().getClass());
+            System.err.println("Unsupported shape type for stretching: " + e.getMessage());
         }
     }
 
