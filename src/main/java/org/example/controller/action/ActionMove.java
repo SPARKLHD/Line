@@ -10,7 +10,7 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ActionMove extends ActionInterface{
+public class ActionMove extends ActionInterface {
     MyShape shape;
     MyShape shapeNew;
     MyShape shapeOld;
@@ -30,21 +30,22 @@ public class ActionMove extends ActionInterface{
         this.model = model;
     }
 
-    void findShape(Point point){
+    void findShape(Point point) {
         Point2D p1 = (Point2D) point;
         p[0] = p1;
         Collection<MyShape> list = model.getList();
-        for (MyShape x:list) {
-            if(x.getShape().contains(p1)) shape = x;
+        for (MyShape x : list) {
+            if (x.getShape().contains(p1)) shape = x;
         }
         shapeOld = shape.clone();
-        shapeNew=shape;
+        shapeNew = shape;
     }
 
     @Override
     public void mousePressed(Point point) {
         findShape(point);
     }
+
     public void moveShape(Point point) {
         p[1] = point;
         if (shape != null) {
@@ -68,52 +69,51 @@ public class ActionMove extends ActionInterface{
                         p1.getX() + deltaX, p1.getY() + deltaY,
                         p2.getX() + deltaX, p2.getY() + deltaY
                 );
+                shape.setShape(line);  // Обновляем линию
             } else {
                 throw new UnsupportedOperationException("Unsupported shape type: " + currentShape.getClass());
             }
 
-            p[0] = p[1];
+            p[0] = p[1];  // Обновляем исходную точку
         }
     }
 
     @Override
     public void mouseDragget(Point point) {
         moveShape(point);
-
     }
 
     @Override
     public void setSampleShape(MyShape myShape) {
-
+        // Здесь можно оставить или реализовать поведение для образца
     }
-    void changeShape(MyShape shape,MyShape shape1){
+
+    void changeShape(MyShape shape, MyShape shape1) {
         ArrayList<MyShape> list = (ArrayList<MyShape>) model.getList();
         int index = list.indexOf(shape);
         list.remove(index);
-        list.add(index,shape1);
+        list.add(index, shape1);
         setChanged();
         notifyObservers();
     }
+
     @Override
     public void execute() {
-        changeShape(shapeOld,shapeNew);
-
+        changeShape(shapeOld, shapeNew);
     }
 
     @Override
     public void unexecute() {
-        changeShape(shapeNew,shapeOld);
-
+        changeShape(shapeNew, shapeOld);
     }
 
     @Override
     public ActionInterface myclone() {
-            ActionMove ad  = new ActionMove(model);
-            ad.shape = this.shape;//.clone();
-            ad.shapeNew = this.shapeNew;//.clone();
-            ad.shapeOld = this.shapeOld;
-            ad.p = this.p;
-            return ad;
-
+        ActionMove ad = new ActionMove(model);
+        ad.shape = this.shape;
+        ad.shapeNew = this.shapeNew;
+        ad.shapeOld = this.shapeOld;
+        ad.p = this.p;
+        return ad;
     }
 }

@@ -79,15 +79,23 @@ public class ActionDraw extends ActionInterface {
 
             if (innerShape instanceof Rectangle2D) {
                 Rectangle2D rect = (Rectangle2D) innerShape;
-                rect.setFrame(p[0].getX(), p[0].getY(), p[1].getX() - p[0].getX(), p[1].getY() - p[0].getY());  // Растягиваем прямоугольник
+                double x = Math.min(p[0].getX(), p[1].getX());  // Начальная точка по оси X
+                double y = Math.min(p[0].getY(), p[1].getY());  // Начальная точка по оси Y
+                double width = Math.abs(p[1].getX() - p[0].getX());  // Ширина прямоугольника
+                double height = Math.abs(p[1].getY() - p[0].getY());  // Высота прямоугольника
+                rect.setFrame(x, y, width, height);  // Растягиваем прямоугольник
+                shape.setShape(rect);  // Устанавливаем обновленный прямоугольник
             } else if (innerShape instanceof Ellipse2D) {
                 Ellipse2D ellipse = (Ellipse2D) innerShape;
-                double width = p[1].getX() - p[0].getX();
-                double height = p[1].getY() - p[0].getY();
-                shape.setShape(new Ellipse2D.Double(p[0].getX(), p[0].getY(), width, height));  // Создаем новый эллипс
+                double x = Math.min(p[0].getX(), p[1].getX());  // Начальная точка по оси X
+                double y = Math.min(p[0].getY(), p[1].getY());  // Начальная точка по оси Y
+                double width = Math.abs(p[1].getX() - p[0].getX());  // Ширина эллипса
+                double height = Math.abs(p[1].getY() - p[0].getY());  // Высота эллипса
+                shape.setShape(new Ellipse2D.Double(x, y, width, height));  // Обновляем эллипс
             } else if (innerShape instanceof Line2D) {
                 Line2D line = (Line2D) innerShape;
                 line.setLine(p[0], p[1]);  // Растягиваем линию
+                shape.setShape(line);  // Устанавливаем обновленную линию
             } else {
                 throw new UnsupportedOperationException("Unsupported shape type for stretching: " + innerShape.getClass());
             }
