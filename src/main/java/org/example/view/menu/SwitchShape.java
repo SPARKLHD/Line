@@ -1,28 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.example.view.menu;;
-import org.example.controller.state.State;;
-import java.awt.geom.RectangularShape;
+package org.example.view.menu;
 
-/**
- *
- * @author vera
- */
-public class SwitchShape implements Command{
-    RectangularShape rs;
+import org.example.controller.state.State;
+import java.awt.Shape;
+
+public class SwitchShape implements Command {
+    Shape shape;
     State state;
 
-    public SwitchShape(RectangularShape rs, State s) {
-        this.rs = rs;
-        state = s;
+    public SwitchShape(Shape shape, State state) {
+        this.shape = shape;
+        this.state = state;
     }
-    
+
     @Override
     public void execute() {
-        state.setRectangularShape(rs);
+        state.setShape(shape); // Передаем любую форму в state
     }
-    
 }

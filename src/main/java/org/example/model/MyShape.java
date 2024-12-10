@@ -2,42 +2,59 @@ package org.example.model;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.Shape;
 import java.awt.geom.RectangularShape;
 
 public class MyShape {
-    Color color;
-    RectangularShape shape;
-    FillBehavior fillBehavior;
+    private Color color;
+    private Shape shape;
+    private FillBehavior fillBehavior;
 
-    public MyShape(Color color, RectangularShape shape) {
+    public MyShape(Color color, Shape shape) {
         this.color = color;
         this.shape = shape;
         this.fillBehavior = FillBehavior.NOFILL;
     }
 
     public MyShape() {
-        color = Color.BLACK;
-        shape = new Rectangle2D.Double();
+        this.color = Color.BLACK;
+        this.shape = new Rectangle2D.Double(); // По умолчанию — прямоугольник
         this.fillBehavior = FillBehavior.NOFILL;
     }
 
-    public MyShape(Color blue, Rectangle2D.Double aDouble, FillBehavior fillBehavior) {
-        color = Color.BLACK;
-        shape = new Rectangle2D.Double();
+    public MyShape(Color color, Shape shape, FillBehavior fillBehavior) {
+        this.color = color;
+        this.shape = shape;
         this.fillBehavior = fillBehavior;
     }
 
-    public void setFrame(Point2D [] p){
-        shape.setFrameFromDiagonal(p[0],p[1]);
+    public void setFrame(Point2D[] points) {
+        if (shape instanceof Rectangle2D) {
+            ((Rectangle2D) shape).setFrameFromDiagonal(points[0], points[1]);
+        } else if (shape instanceof Line2D) {
+            ((Line2D) shape).setLine(points[0], points[1]);
+        } else {
+            throw new UnsupportedOperationException("Cannot set frame for this shape");
+        }
     }
-    public void draw(Graphics2D g){
+
+    public void draw(Graphics2D g) {
         Paint paint = g.getPaint();
         g.setColor(color);
-        fillBehavior.draw(g,shape);
+
+        if (shape instanceof Line2D) {
+            g.draw(shape); // Рисуем линию
+        } else if (shape instanceof RectangularShape) {
+            fillBehavior.draw(g, (RectangularShape) shape); // Используем поведение заполнения для RectangularShape
+        } else {
+            throw new UnsupportedOperationException("Unsupported shape type: " + shape.getClass());
+        }
+
         g.setPaint(paint);
     }
+
     public Color getColor() {
         return color;
     }
@@ -46,11 +63,11 @@ public class MyShape {
         this.color = color;
     }
 
-    public RectangularShape getShape() {
+    public Shape getShape() {
         return shape;
     }
 
-    public void setShape(RectangularShape shape) {
+    public void setShape(Shape shape) {
         this.shape = shape;
     }
 
@@ -61,11 +78,22 @@ public class MyShape {
     public void setFillBehavior(FillBehavior fillBehavior) {
         this.fillBehavior = fillBehavior;
     }
+
     public MyShape clone() {
         MyShape s = new MyShape();
         s.setColor(this.color);
         s.fillBehavior = this.fillBehavior;
-        s.setShape((RectangularShape) this.shape.clone());
+
+        if (this.shape instanceof Rectangle2D) {
+            Rectangle2D rect = (Rectangle2D) this.shape;
+            s.setShape(new Rectangle2D.Double(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight()));
+        } else if (this.shape instanceof Line2D) {
+            Line2D line = (Line2D) this.shape;
+            s.setShape(new Line2D.Double(line.getP1(), line.getP2()));
+        } else {
+            throw new UnsupportedOperationException("Cloning not supported for this shape type: " + shape.getClass());
+        }
+
         return s;
     }
 }

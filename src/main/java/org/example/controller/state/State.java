@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.example.controller.state;
 
 import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
 import org.example.model.Model;
 import org.example.controller.action.*;
 import org.example.model.FillBehavior;
 import org.example.model.MyShape;
 
-
-/**
- *
- * @author Netbeans
- */
 public class State {
     Model model;
     MyShape sampleShape;
@@ -26,7 +17,7 @@ public class State {
     public State(Model model) {
         this.model = model;
         action = new ActionDraw(model);
-        sampleShape = new MyShape(Color.BLUE, new Rectangle2D.Double(), FillBehavior.NOFILL );
+        sampleShape = new MyShape(Color.BLUE, new Rectangle2D.Double(), FillBehavior.NOFILL);
         action.setSampleShape(sampleShape);
     }
 
@@ -34,7 +25,6 @@ public class State {
     }
 
     public void setAction(ActionInterface action) {
-
         this.action = action;
         action.setModel(model);
     }
@@ -48,14 +38,13 @@ public class State {
     }
 
     public void setSampleShape(MyShape sampleShape) {
-
         this.sampleShape = sampleShape;
         action.setSampleShape(sampleShape);
     }
 
-
-    public void setRectangularShape(RectangularShape rs) {
-        sampleShape.setShape(rs);
+    // Изменяем метод на работу с любыми Shape
+    public void setShape(Shape shape) {
+        sampleShape.setShape(shape);
         action.setSampleShape(sampleShape);
     }
 
@@ -68,6 +57,4 @@ public class State {
         sampleShape.setFillBehavior(fb);
         action.setSampleShape(sampleShape);
     }
-    
-    
 }

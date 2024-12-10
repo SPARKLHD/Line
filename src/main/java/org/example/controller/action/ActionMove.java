@@ -5,9 +5,10 @@ import org.example.model.MyShape;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Observable;
 
 public class ActionMove extends ActionInterface{
     MyShape shape;
@@ -45,16 +46,33 @@ public class ActionMove extends ActionInterface{
         findShape(point);
     }
     public void moveShape(Point point) {
-        p[1] = (Point2D) point;
-        if(shape!=null){
-            double deltaX = p[1].getX()-p[0].getX();
-            double deltaY = p[1].getY()-p[0].getY();
-            double maxX=shape.getShape().getMaxX()+deltaX;
-            double maxY=shape.getShape().getMaxY()+ deltaY;
-            double minX = shape.getShape().getMinX()+deltaX;
-            double minY = shape.getShape().getMinY()+deltaY;
-            shape.getShape().setFrameFromDiagonal(minX, minY, maxX, maxY);
-            p[0]=p[1];
+        p[1] = point;
+        if (shape != null) {
+            double deltaX = p[1].getX() - p[0].getX();
+            double deltaY = p[1].getY() - p[0].getY();
+
+            Shape currentShape = shape.getShape();
+
+            if (currentShape instanceof Rectangle2D) {
+                Rectangle2D rect = (Rectangle2D) currentShape;
+                double maxX = rect.getMaxX() + deltaX;
+                double maxY = rect.getMaxY() + deltaY;
+                double minX = rect.getMinX() + deltaX;
+                double minY = rect.getMinY() + deltaY;
+                rect.setFrameFromDiagonal(minX, minY, maxX, maxY);
+            } else if (currentShape instanceof Line2D) {
+                Line2D line = (Line2D) currentShape;
+                Point2D p1 = line.getP1();
+                Point2D p2 = line.getP2();
+                line.setLine(
+                        p1.getX() + deltaX, p1.getY() + deltaY,
+                        p2.getX() + deltaX, p2.getY() + deltaY
+                );
+            } else {
+                throw new UnsupportedOperationException("Unsupported shape type: " + currentShape.getClass());
+            }
+
+            p[0] = p[1];
         }
     }
 
